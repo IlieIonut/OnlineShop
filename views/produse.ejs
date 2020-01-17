@@ -1,0 +1,126 @@
+<% include partials/header %>
+<p> </p>
+<div class="text-right">
+<select class="price-sorting type-regular btn btn-primary" name="price-sorting">
+    <option selected disabled>Ordoneaza dupa</option>
+    <option value="l2h">Pret crescator</option>
+    <option value="h2l">Pret descrescator</option>
+	<option value="a12">Alfabetic</option>
+	<option value="21a">Invers alfabetic</option>
+</select>
+</div>
+<div class="shop-items">
+    <%for(let i = 0; i < produse.size; i++){
+		if(produseactive.get(i)=="True"){%>
+
+			<div class="card text-center" data-name=<%= produse.get(i)[0]%> data-price=<%= produse.get(i)[1]%> style="width: 18rem;">
+				<img data-toggle="modal" data-target="#<%= produse.get(i)[0]%>" src=<%= produse.get(i)[2]%> class="card-img-top" alt="...">
+				
+				<div class="card-body">
+					<h5 class="card-title"><%= produse.get(i)[0]%></h5>
+					<p class="card-text">Pret <%= produse.get(i)[1]%> lei</p>
+					<form action="/adaugacos" method="POST">
+						<input type="text" name="selected" value=<%= produse.get(i)[0] %> style="display:none">				
+						<button class="btn btn-primary">Cumpara</button>
+					</form>
+				
+						<div class="modal fade" id="<%= produse.get(i)[0]%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						  <div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+							  <div class="modal-header">
+								<h5 class="modal-title" id="exampleModalCenterTitle"><%= produse.get(i)[0]%></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								  <span aria-hidden="true">&times;</span>
+								</button>
+							  </div>
+							  <div class="modal-body">
+							  Pret <%= produse.get(i)[1]%>
+							  <p> </p>
+							  <%= produse.get(i)[4]%>
+							  <p> </p>
+							  Data expirare: <%= produse.get(i)[3]%>
+							  
+							  </div>
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<form action="/adaugacos" method="POST">
+									<input type="text" name="selected" value=<%= produse.get(i)[0] %> style="display:none">				
+									<button class="btn btn-primary">Cumpara</button>
+								</form>
+   							  </div>
+							</div>
+						  </div>
+						</div>
+						
+				</div>
+			</div>
+		<%}%>
+	<%}%>
+</div>
+
+<script>
+
+$(document).on("change", ".price-sorting", function() {
+
+    var sortingMethod = $(this).val();
+
+    if(sortingMethod == 'l2h')
+    {
+        sortProductsPriceAscending();
+    }
+    else if(sortingMethod == 'h2l')
+    {
+        sortProductsPriceDescending();
+    }
+	else if(sortingMethod == 'a12'){
+	    sortProductsAscending();
+    }
+	else if(sortingMethod == '21a'){
+	    sortProductsDescending();
+    }
+});
+function sortProductsPriceAscending()
+{
+    var products = $('.card');
+    products.sort(function(a, b){ return $(a).data("price")-$(b).data("price")});
+    $(".shop-items").html(products);
+
+}
+
+function sortProductsPriceDescending()
+{
+    var products = $('.card');
+    products.sort(function(a, b){ return $(b).data("price") - $(a).data("price")});
+    $(".shop-items").html(products);
+
+}
+
+
+function sortProductsAscending()
+{
+    var products = $('.card');
+	products.sort(function(a, b){
+     if(a.getAttribute('data-name') < b.getAttribute('data-name')) { return -1; }
+    if(a.getAttribute('data-name') > b.getAttribute('data-name')) { return 1; }
+    return 0;
+	});
+	$(".shop-items").html(products);
+
+}
+
+function sortProductsDescending()
+{
+	var products = $('.card');
+	products.sort(function(a, b){
+     if(a.getAttribute('data-name') > b.getAttribute('data-name')) { return -1; }
+    if(a.getAttribute('data-name') < b.getAttribute('data-name')) { return 1; }
+    return 0;
+	});
+	$(".shop-items").html(products);
+}
+
+
+
+</script>
+<% include partials/footer %>
+

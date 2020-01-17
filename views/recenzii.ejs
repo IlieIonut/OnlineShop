@@ -1,0 +1,174 @@
+<% include partials/header %>
+
+
+<!DOCTYPE html>
+<html>
+<title>example</title>
+   <script src= 
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
+    </script> 
+<style>
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 10%;
+  height: 30px;
+  background-color: #007bff;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+</style>
+<body>
+  <div class="bara">
+    <br>
+	<div id="myProgress" class="bara">
+      <div id="myBar" class="bara" style="width:0%">0%</div>
+    </div>
+    <br>
+
+<!-- Modal -->
+
+<div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      
+      <div class="modal-body">
+        <img src="emoji1.jpg">
+      </div>
+      
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="ModalLabel2" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      
+      <div class="modal-body">
+        <img src="emoji2.jpg">
+      </div>
+      
+  </div>
+</div>  
+
+
+<form action="/addrecenzie" method="POST">
+<p></p>
+
+<div class="text-center">
+  <div class="alert btn-primary" >
+	Ti se pare ca are un aspect modern? 
+  </div>
+ <select id="intrebarea1" name="newrecenzie" style="display:none">
+    <option value="Da">Da</option>
+    <option value="Nu">Nu</option>
+  </select>  
+	<button type="button" class="btn btn-primary" id="raspuns1a" name="da" data-toggle="modal" data-target="#Modal1" onclick="move()">Da</button>
+	<button type="button" class="btn btn-primary" id="raspuns1" name="nu" data-toggle="modal" data-target="#Modal2" onclick="move(),select()">Nu</button>
+<p></p>
+  <div class="alert btn-primary" >
+	Iti place cum arata site-ul?
+  </div>
+ <select id="intrebarea2" name="newrecenzie" style="display:none">
+    <option value="Da">Da</option>
+    <option value="Nu">Nu</option>
+  </select>  
+	
+	<button type="button" class="btn btn-primary" id="raspuns2a" name="da" data-toggle="modal" data-target="#Modal1" onclick="move()">Da</button>
+	<button type="button" class="btn btn-primary" id="raspuns2" name="nu" data-toggle="modal" data-target="#Modal2" onclick="move(),select2()">Nu</button>
+<p></p>
+  <div class="alert btn-primary" >
+	Ai modifica ceva?
+  </div>
+ <select id="intrebarea3" name="newrecenzie" style="display:none">
+    <option value="Da">Da</option>
+    <option value="Nu">Nu</option>
+  </select>  
+	<button type="button" class="btn btn-primary" id="raspuns3a" name="da" data-toggle="modal" data-target="#Modal2" onclick="move()">Da</button>
+	<button type="button" class="btn btn-primary" id="raspuns3" name="nu" data-toggle="modal" data-target="#Modal1" onclick="move(),select3()">Nu</button>
+<p></p>
+  <div class="alert btn-primary" >
+	Crezi ca se poate imbunatati?
+  </div>
+ <select id="intrebarea4" name="newrecenzie" style="display:none">
+    <option value="Da">Da</option>
+    <option value="Nu">Nu</option>
+  </select>  
+	<button type="button" class="btn btn-primary" id="raspuns4a" name="da" data-toggle="modal" data-target="#Modal2" onclick="move()">Da</button>
+	<button type="button" class="btn btn-primary" id="raspuns4" name="nu" data-toggle="modal" data-target="#Modal1" onclick="move(),select4()">Nu</button>
+<p></p>	
+  <div class="alert btn-primary" >
+	E cel mai bun site pe care il stii?
+  </div>
+
+ <select id="intrebarea5" name="newrecenzie" style="display:none">
+    <option value="Da">Da</option>
+    <option value="Nu">Nu</option>
+  </select>  
+	<button type="button" class="btn btn-primary" id="raspuns5a" name="da" data-toggle="modal" data-target="#Modal1" onclick="move()">Da</button>
+	<button type="button" class="btn btn-primary" id="raspuns5" name="nu" data-toggle="modal" data-target="#Modal2" onclick="move(),select5()">Nu</button>
+<p></p>
+<button class="btn btn-primary" id="final" disabled>Am terminat</button>
+<p></p>
+
+</div>
+</form>  
+
+
+<script>
+var width = 0;
+
+function move() {
+  var elem = document.getElementById("myBar");
+    if (width < 100) {
+      width+=20;
+      elem.style.width = width + '%';
+      elem.innerHTML = width * 1 + '%';
+    }
+	if (width == 100) {	
+		document.getElementById("final").disabled = false;
+	}
+}
+
+function select() {
+  if(document.getElementById("raspuns1").name=="nu")
+	{
+		document.getElementById("intrebarea1").selectedIndex = "1";
+	}
+}
+function select2() {
+  if(document.getElementById("raspuns2").name=="nu")
+	{
+		document.getElementById("intrebarea2").selectedIndex = "1";
+	}
+}
+
+function select3() {
+  if(document.getElementById("raspuns3").name=="nu")
+	{
+		document.getElementById("intrebarea3").selectedIndex = "1";
+	}
+}
+
+function select4() {
+  if(document.getElementById("raspuns4").name=="nu")
+	{
+		document.getElementById("intrebarea4").selectedIndex = "1";
+	}
+}
+
+function select5() {
+  if(document.getElementById("raspuns5").name=="nu")
+	{
+		document.getElementById("intrebarea5").selectedIndex = "1";
+	}
+}
+
+</script>
+</body>
+
+</html>
+
+<% include partials/footer %>

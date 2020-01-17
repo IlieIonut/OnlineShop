@@ -1,0 +1,17 @@
+<% include partials/header %>
+<div>
+<p></p>
+</div>
+<div>
+<%for(let i = 0; i < nr; i++){%>
+	<p>Cumparatorul <%=i+1%>:</p> 
+	<p>  *Nume : <%=NumeClienti[i][0]%> <%=NumeClienti[i][1]%></p>
+	<p>  *In localitatea : <%=LocClienti[i]%></p>
+	<p>  *A cumparat : <%=Nrprod[i]%> produse</p>
+	<p>  *In valore de : <%=Ttotal[i]%> lei</p>
+	<p>  *In data de : <%=Datacumparare[i]%></p>
+	<%}%>
+</div>
+	
+
+<% include partials/footer %>

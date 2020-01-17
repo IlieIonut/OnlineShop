@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta property="og:title" content="Best site">
+<meta property="og:description" content="Best.">
+<meta property="og:image" content="C:\Users\iliec\Desktop\proiect_web\public\produse\download.jpg">
+<meta property="og:url" content="http://localhost:3000/">
+
+<title>Online Shop.com</title>
+<link rel="stylesheet" type="text/css" href="/produse.css">
+<link rel="icon" href="/dolphin.png" type="image/png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div id="page-container">
+   <div id="content-wrap">
+   
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" >
+    <img src="download.jpg" width="30" height="30" class="d-inline-block align-top" alt="poza">
+    Online Shop
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="../homepage">Home Page<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="../produse">Produse<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="../promotii">Promotii<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="../recenzii">Recenzii<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+	<a href="../cos" role="button" class="btn btn-primary">Cosul de cumparaturii
+	<img src="carut.png" width="30" height="30" class="d-inline-block align-top" alt="carut"></a>
+	<form class="nav-item active form-inline my-2 my-lg-0">
+       	<% if (!user) { %>
+			<a href="../admin" class="nav-link btn btn-outline-dark my-2 my-sm-0" role="button" aria-pressed="true">Admin</a>
+		<% } else { %>
+			<a href="../admin" class="nav-link btn btn-outline-dark my-2 my-sm-0" role="button" aria-pressed="true">Admin</a>
+		
+			<a href="/logout" class="nav-link btn btn-outline-dark my-2 my-sm-0" role="button" aria-pressed="true">Log out</a>
+		<% } %>
+	</form>
+  </div>
+</nav>
