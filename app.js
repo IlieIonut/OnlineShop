@@ -134,41 +134,9 @@ app.post("/adaugare", function(req, res){
 	res.redirect("/admin");
 });
 
-//var ogs = require('open-graph-scraper');
-
-//ogs(
-//	{ url: 'http://localhost:3000/' }, // Settings object first
-//	function(er, res) { console.log(er, res); }  // Callback 
-//);
-
 var alert =require( 'alert-node');
 
 
-
-var nodemailer = require('nodemailer');
-
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: '2020OnlineShop2020@gmail.com',
-    pass: 'secret2020'
-  }
-});
-
-	var mailOptions = {
-    from: '2020OnlineShop2020@gmail.com',
-	  to: 'ilie.cristian.ionut@gmail.com',
-	  subject: 'Va multumim pentru cumparaturile facute la noi',
-	  text: 'Super tare!'
-	};
-
-	transporter.sendMail(mailOptions, function(error, info){
-	  if (error) {
-		console.log(error);
-	  } else {
-		console.log('Email sent: ' + info.response);
-	  }
-	});
 
 
 app.post("/adaugacos", function(req, res){
@@ -257,7 +225,33 @@ app.post("/final", function(req, res){
 	console.log(NumeClienti,LocClienti);
 	console.log(produsecos);
 	var mail=req.body.email;
-	console.log(mail)
+
+		var nodemailer = require('nodemailer');
+
+	var transporter = nodemailer.createTransport({
+	  service: 'gmail',
+	  auth: {
+		user: '2020OnlineShop2020@gmail.com',
+		pass: 'secret2020'
+	  }
+	});
+
+	var mailOptions = {
+    from: '2020OnlineShop2020@gmail.com',
+	  to: mail,
+	  subject: 'Va multumim pentru cumparaturile facute la noi',
+	  text: 'Super tare!'
+	};
+
+	transporter.sendMail(mailOptions, function(error, info){
+	  if (error) {
+		console.log(error);
+	  } else {
+		console.log('Email sent: ' + info.response);
+	  }
+	});
+
+	console.log(mail);
     res.redirect("/homepage");
 });
 
