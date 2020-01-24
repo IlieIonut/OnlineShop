@@ -232,7 +232,7 @@ app.post("/final", function(req, res){
 	  service: 'gmail',
 	  auth: {
 		user: '2020OnlineShop2020@gmail.com',
-		pass: 'secret2020'
+		pass: 'secret'
 	  }
 	});
 
