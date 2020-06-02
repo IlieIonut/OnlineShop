@@ -2,10 +2,18 @@
 <div>
 <p></p>
 </div>
-
+<div id='target'>
+<ul>
 <% recenzii.forEach(function(recenzie){%>
   <li><%= recenzie %></li>
 <% }); %>
+</ul>
+</div>
+<script>
+$( "#target" ).click(function() {
+	 <%-JSON.stringify(recenzii.reverse())%>
+	});
+</script>
 
 
 <% include partials/footer %>

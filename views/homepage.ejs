@@ -43,4 +43,18 @@ $(".carousel-item").animate({
     <span class="sr-only">Next</span>
   </a>  
 </div>
+<script>
+$(document).ready(function() {
+  var start = new Date();
+
+  $(window).unload(function() {
+      var end = new Date();
+      $.ajax({ 
+        url: "homepage",
+        data: {'timeSpent': end - start},
+        async: false
+      })
+   });
+});
+</script>
 <% include partials/footer %>

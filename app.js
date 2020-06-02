@@ -3,13 +3,24 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var db = require('./db');
 
+var test=3;
+var NumeUser='';
+
 passport.use(new Strategy(
-  function(username, password, cb) {
+	function(username, password, cb) {
     db.users.findByUsername(username, function(err, user) {
-      if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false); }
-      return cb(null, user);
+
+	  if (err) {
+		  test=test-1;
+		  return cb(err); }
+      if (!user) {
+		  test=test-1;
+		  return cb(null, false); }
+      if (user.password != password) {
+		  test=test-1;
+		  return cb(null, false); }
+      NumeUser=username;
+	  return cb(null, user);
     });
   }));
 
@@ -47,7 +58,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname +"/public"));
 app.set("view engine", "ejs");
 
-var recenzii = [];
+var recenzii = [['Da','Da','Da','Da','Da'],['Nu','Nu','Nu','Nu','Nu']];
 var Ttotal = [];
 var Nrprod = [];
 var Datacumparare = [];
@@ -108,6 +119,25 @@ app.post("/blocheaza", function(req, res){
 			produseactive.set(key,"False");
 		}			
 	}
+	
+	var fs = require('fs')
+	var logger = fs.createWriteStream('ModificareDate.csv', {
+	  flags: 'a'
+	})
+	
+	let date_ob = new Date();
+	let date = ("0" + date_ob.getDate()).slice(-2);
+	let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+	let year = date_ob.getFullYear();
+	let hours = date_ob.getHours();
+	let minutes = date_ob.getMinutes();
+	let seconds = date_ob.getSeconds();
+	logger.write(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + " ");
+	logger.write('utilizatorul ' + NumeUser + ' a blocat produsul ');
+	logger.write(selected + '\n'); 
+
+	logger.end() 
+	
     res.redirect("/admin");
 });
 
@@ -122,6 +152,26 @@ app.post("/deblocheaza", function(req, res){
 			produseactive.set(key,"True");
 		}			
 	}
+	
+	
+	var fs = require('fs')
+	var logger = fs.createWriteStream('ModificareDate.csv', {
+	  flags: 'a'
+	})
+	
+	let date_ob = new Date();
+	let date = ("0" + date_ob.getDate()).slice(-2);
+	let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+	let year = date_ob.getFullYear();
+	let hours = date_ob.getHours();
+	let minutes = date_ob.getMinutes();
+	let seconds = date_ob.getSeconds();
+	logger.write(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + " ");
+	logger.write('utilizatorul ' + NumeUser + ' a deblocat produsul ');
+	logger.write(selected + '\n'); 
+
+	logger.end() 
+	
     res.redirect("/admin");
 });
 
@@ -131,6 +181,25 @@ app.post("/adaugare", function(req, res){
 	produse.set(produse.size,[selected[0],selected[1],selected[2],selected[3],selected[4]]);
 	produseactive.set(produseactive.size,"True");
 	console.log(produse);
+	
+	var fs = require('fs')
+	var logger = fs.createWriteStream('ModificareDate.csv', {
+	  flags: 'a'
+	})
+	
+	let date_ob = new Date();
+	let date = ("0" + date_ob.getDate()).slice(-2);
+	let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+	let year = date_ob.getFullYear();
+	let hours = date_ob.getHours();
+	let minutes = date_ob.getMinutes();
+	let seconds = date_ob.getSeconds();
+	logger.write(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + " ");
+	logger.write('utilizatorul ' + NumeUser + ' a adaugat produsul ');
+	logger.write(produse.get(produse.size-1)[0] + '\n'); 
+
+	logger.end() 
+	
 	res.redirect("/admin");
 });
 
@@ -186,6 +255,25 @@ app.get("/blocheazaP",require('connect-ensure-login').ensureLoggedIn(),function(
 });
 
 app.get("/Lrecenzii",require('connect-ensure-login').ensureLoggedIn(),function(req, res){
+
+  	var fs = require('fs')
+	var logger = fs.createWriteStream('ModificareDate.csv', {
+	  flags: 'a'
+	})
+	
+	let date_ob = new Date();
+	let date = ("0" + date_ob.getDate()).slice(-2);
+	let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+	let year = date_ob.getFullYear();
+	let hours = date_ob.getHours();
+	let minutes = date_ob.getMinutes();
+	let seconds = date_ob.getSeconds();
+	logger.write(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + " ");
+	logger.write('utilizatorul ' + NumeUser + ' a vizitat lista recenzii ' + '\n');
+
+
+	logger.end()
+
   res.render("Lrecenzii",{recenzii: recenzii, user: req.user });
 });
 
@@ -232,7 +320,11 @@ app.post("/final", function(req, res){
 	  service: 'gmail',
 	  auth: {
 		user: '2020OnlineShop2020@gmail.com',
+<<<<<<< Updated upstream
 		pass: 'secret'
+=======
+		pass: 'secret2020'
+>>>>>>> Stashed changes
 	  }
 	});
 
@@ -262,6 +354,24 @@ app.get("/finalizare",function(req, res){
 });
 
 app.get("/istoric",require('connect-ensure-login').ensureLoggedIn(),function(req, res){
+	var fs = require('fs')
+	var logger = fs.createWriteStream('ModificareDate.csv', {
+	  flags: 'a'
+	})
+	
+	let date_ob = new Date();
+	let date = ("0" + date_ob.getDate()).slice(-2);
+	let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+	let year = date_ob.getFullYear();
+	let hours = date_ob.getHours();
+	let minutes = date_ob.getMinutes();
+	let seconds = date_ob.getSeconds();
+	logger.write(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + " ");
+	logger.write('utilizatorul ' + NumeUser + ' a vizitat istoricul comenzilor ' + '\n');
+
+
+	logger.end()
+	
   res.render("istoric",{ user: req.user,NumeClienti:NumeClienti,Ttotal:Ttotal,LocClienti:LocClienti,Datacumparare:Datacumparare,Nrprod:Nrprod,nr:nr});
 });
 
@@ -288,7 +398,7 @@ app.get("/recenzii", function(req, res){
 
 app.get('/login',
   function(req, res){
-    res.render('login');
+    res.render('login',{test: test});
   });
   
 app.post('/login', 
@@ -311,6 +421,39 @@ app.get('/cos',function(req, res){
    res.render("cos",{produse: produse, produseactive: produseactive, produsecos : produsecos, user: req.user });
 });
 
+app.use(function(req, res, next) {
+	
+	const fisiere=[]
+	const path = require('path');
+	const fs = require('fs');
+	const directoryPath = path.join(__dirname, 'views');
+	fs.readdir(directoryPath, function (err, files) {
+		if (err) {
+			return console.log('Unable to scan directory: ' + err);
+		} 
+		files.forEach(function (file) {
+			if (req.url[1]==file[0]){
+					if(file!='partials'){ 
+						if(file!='eror.ejs'){
+							console.log("me+" + fisiere)
+							console.log(req.url[1] + file[0] + file.length)
+							var v = file.slice(0, file.length-4);
+							fisiere.push(v)
+							}
+					}
+			}
+			console.log(file); 
+		});
+			
+		console.log("Ati cautat " + req.url);
+		console.log('aici' + fisiere);
+		res.status(404);
+		res.render('eror',{fisiere:fisiere});
+		console.log('aici' + fisiere);
+	});
+	
+	
+});
 
 app.listen(3000, "127.0.0.1", function(){
    console.log("Server is listening!!!"); 
