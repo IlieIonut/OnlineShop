@@ -323,7 +323,7 @@ app.post("/final", function(req, res){
 <<<<<<< Updated upstream
 		pass: 'secret'
 =======
-		pass: 'secret2020'
+		pass: 'secret'
 >>>>>>> Stashed changes
 	  }
 	});
